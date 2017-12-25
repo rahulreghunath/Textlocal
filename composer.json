@@ -16,8 +16,7 @@
 
     "autoload": {
         "psr-4": {
-            ["Rahulreghunath\\Textlocal\\": "src/",
-			"rahulreghunath\\textlocal\\": "src/"]
+            "Rahulreghunath\\Textlocal\\": "src/",
         }
     },
     "minimum-stability": "dev"
