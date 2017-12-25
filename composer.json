@@ -1,0 +1,23 @@
+{
+    "name": "rahulreghunath/textlocal",
+    "description": "Textlocal sms gateway wrapper for Laravel",
+    "license": "MIT",
+    "keywords": ["laravel", "textlocal", "sms gateway"],
+    "authors": [
+        {
+            "name": "Rahul Reghunath",
+            "email": "reghunath11@gmail.com",
+            "role": "developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Rahulreghunath\\Textlocal\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
