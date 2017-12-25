@@ -19,12 +19,5 @@
             "Rahulreghunath\\Textlocal\\": "src/"
         }
     },
-	"extra": {
-		"laravel": {
-			"providers": [
-				"Rahulreghunath\\Textlocal\\ServiceProvider"
-			],
-		}
-	},
     "minimum-stability": "dev"
 }
