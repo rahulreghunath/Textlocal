@@ -22,12 +22,9 @@
 	"extra": {
 		"laravel": {
 			"providers": [
-				"Foo\\Bar\\ServiceProvider"
+				"Rahulreghunath\\Textlocal\\ServiceProvider"
 			],
-			"aliases": {
-				"Bar": "Foo\\Bar\\Facade"
-			}
 		}
-	}
+	},
     "minimum-stability": "dev"
 }
