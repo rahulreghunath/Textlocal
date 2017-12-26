@@ -1,6 +1,6 @@
 <?php
 
-namespace rahulreghunath\textlocal;
+namespace Rahulreghunath\Textlocal;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 
 class ServiceProvider extends IlluminateServiceProvider
