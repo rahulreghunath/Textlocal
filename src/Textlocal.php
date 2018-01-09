@@ -16,11 +16,11 @@ class Textlocal
 
     public function send($message, $receiver, $sender = null)
     {
-		
+        $sender = $sender != null ? $sender : $this->sender;
         $xmlData = '
             <SMS>
             <Account apiKey="' . $this->key . '" Test="0" Info="1" JSON="0">
-            <Sender From="' . $sender != null ? $sender : $this->sender . '">
+            <Sender From="' . $sender . '">
             <Messages>
             <Msg ID="16" Number="' . $receiver . '">
             <Text>' . $message . '</Text>
@@ -38,7 +38,8 @@ class Textlocal
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $data = curl_exec($ch);
         curl_close($ch);
+        
         return $data;
-		
+
     }
 }
