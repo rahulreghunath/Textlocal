@@ -16,7 +16,7 @@ class Textlocal
 
     public function send($message, $receiver, $sender = null)
     {
-
+		
         $xmlData = '
             <SMS>
             <Account apiKey="' . $this->key . '" Test="0" Info="1" JSON="0">
@@ -39,5 +39,6 @@ class Textlocal
         $data = curl_exec($ch);
         curl_close($ch);
         return $data;
+		
     }
 }
