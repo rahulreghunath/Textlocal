@@ -19,7 +19,7 @@ After adding ServiceProvider, Run the command
         
         php artisan vendor:publish
         
-After that set your textlocal authentication key inside zoho.php file inside config folder and you are good to go
+After that set your textlocal authentication key inside textlocal.php file inside config folder and you are good to go
 
     $sms = new Textlocal();
     $sms->send('message', 'mobile number');
