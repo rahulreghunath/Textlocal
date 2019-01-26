@@ -2,44 +2,26 @@
 
 namespace Rahulreghunath\Textlocal;
 
-class Textlocal
+class Textlocal extends TextLocalOriginal
 {
-    private $key, $sender;
+    private $sender;
 
     public function __construct()
     {
-
-        $this->key = config('textlocal.key'); # Authentication key
+        parent::__construct('', '', config('textlocal.key'));
         $this->sender = config('textlocal.sender'); # Default sender name
-
     }
 
-    public function send($message, $receiver, $sender = null)
+    /**
+     * @param string $message
+     * @param string $receiver
+     * @param string $sender
+     * @return array|mixed
+     * @throws \Exception
+     */
+    public function send($message, $receiver, $sender = '')
     {
-        $sender = $sender != null ? $sender : $this->sender;
-        $xmlData = '
-            <SMS>
-            <Account apiKey="' . $this->key . '" Test="0" Info="1" JSON="0">
-            <Sender From="' . $sender . '">
-            <Messages>
-            <Msg ID="16" Number="' . $receiver . '">
-            <Text>' . $message . '</Text>
-            </Msg>
-            </Messages>
-            </Sender>
-            </Account>
-            </SMS>';
-        $post = 'data=' . urlencode($xmlData);
-        $url = "http://api.textlocal.in/xmlapi.php";
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $data = curl_exec($ch);
-        curl_close($ch);
-        
-        return $data;
-
+        $result = $this->sendSms([$receiver], $message, $sender != '' ? $sender : $this->sender);
+        return $result;
     }
 }
