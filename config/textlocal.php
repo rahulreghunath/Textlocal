@@ -9,6 +9,6 @@
 		|--------------------------------------------------------------------------
 		*/
 		
-		'key' => 'your API key',
-        'sender' => 'TXTLCL',
+		'key' => env('TEXT_LOCAL_KEY'),
+        	'sender' => env('TEXT_LOCAL_SENDER','TXTLCL'),
 	);
