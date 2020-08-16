@@ -23,3 +23,6 @@ After that set your textlocal authentication key inside textlocal.php file insid
 
     $sms = new Textlocal();
     $sms->send('message', 'mobile number','sender'); //sender is optional
+ 
+ ### Documentation
+ Complete Documentation can be found [here](https://rahulreghunath.github.io/Textlocal/)
