@@ -21,5 +21,16 @@ After adding ServiceProvider, Run the command
         
 After that set your textlocal authentication key inside textlocal.php file inside config folder and you are good to go
 
-    $sms = new Textlocal();
-    $sms->send('message', 'mobile number','sender'); //sender is optional
+### Usage
+
+ $sms = new Textlocal();
+ 
+ #### Methods
+ 1. ##### send($message, $mobile_number,$sender)
+ 
+    Args
+
+ 
+    
+    
+    
