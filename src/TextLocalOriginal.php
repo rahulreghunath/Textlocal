@@ -18,7 +18,7 @@ use Exception;
  *
  * @package    Rahulreghunath\Textlocal
  * @subpackage API
- * @author     Andy Dixon <andy.dixon@tetxlocal.com>
+ * @author     Andy Dixon <andy.dixon@tetxlocal.com>, Rahul Reghunath <me@rahulr.me>
  * @version    1.4-IN
  * @const      REQUEST_URL       URL to make the request to
  * @const      REQUEST_TIMEOUT   Timeout in seconds for the HTTP request
@@ -69,7 +69,7 @@ class TextLocalOriginal
      * @param null $sched
      * @param false $test
      * @param null $receiptURL
-     * @param numm $custom
+     * @param null $custom
      * @param false $optouts
      * @param false $simpleReplyService
      * @return array|mixed
@@ -186,7 +186,7 @@ class TextLocalOriginal
      * @param null $sender
      * @param false $test
      * @param null $receiptURL
-     * @param numm $custom
+     * @param null $custom
      * @param false $optouts
      * @param false $simpleReplyService
      * @return array|mixed
@@ -300,6 +300,7 @@ class TextLocalOriginal
     /**
      *Returns reseller customer's ID's
      * @return array
+     * @throws Exception
      **/
 
     public function getUsers()
@@ -342,8 +343,11 @@ class TextLocalOriginal
         return $this->_sendRequest('transfer_credits', $params);
     }
 
-    /**Get templates from an account **/
-
+    /**
+     * Get templates from an account
+     * @return array|mixed
+     * @throws Exception
+     */
     public function getTemplates()
     {
         return $this->_sendRequest('get_templates');
@@ -351,7 +355,8 @@ class TextLocalOriginal
 
     /** Check the availability of a keyword
      * @param $keyword
-     * return array|mixed
+     * @return array|mixed
+     * @throws Exception
      */
     public function checkKeyword($keyword)
     {
@@ -364,6 +369,7 @@ class TextLocalOriginal
      * Create a new contact group
      * @param $name
      * @return array|mixed
+     * @throws Exception
      */
     public function createGroup($name)
     {
@@ -402,6 +408,7 @@ class TextLocalOriginal
      * @param        $numbers
      * @param string $groupid
      * @return array|mixed
+     * @throws Exception
      */
     public function createContacts($numbers, $groupid = '5')
     {
@@ -419,10 +426,10 @@ class TextLocalOriginal
     /**
      * Create bulk contacts - with name and custom information from an array of:
      * [first_name] [last_name] [number] [custom1] [custom2] [custom3]
-     *
      * @param array $contacts
      * @param string $groupid
      * @return array|mixed
+     * @throws Exception
      */
     function createContactsBulk($contacts, $groupid = '5')
     {
@@ -437,6 +444,7 @@ class TextLocalOriginal
     /**
      * Get a list of groups and group IDs
      * @return array|mixed
+     * @throws Exception
      */
     public function getGroups()
     {
@@ -447,6 +455,7 @@ class TextLocalOriginal
      * Get the status of a message based on the Message ID - this can be taken from sendSMS or from a history report
      * @param $messageid
      * @return array|mixed
+     * @throws Exception
      */
     public function getMessageStatus($messageid)
     {
@@ -458,6 +467,7 @@ class TextLocalOriginal
      * Get the status of a message based on the Batch ID - this can be taken from sendSMS or from a history report
      * @param $batchid
      * @return array|mixed
+     * @throws Exception
      */
     public function getBatchStatus($batchid)
     {
@@ -468,6 +478,7 @@ class TextLocalOriginal
     /**
      * Get sender names
      * @return array|mixed
+     * @throws Exception
      */
     public function getSenderNames()
     {
@@ -477,6 +488,7 @@ class TextLocalOriginal
     /**
      * Get inboxes available on the account
      * @return array|mixed
+     * * @throws Exception
      */
     public function getInboxes()
     {
@@ -486,6 +498,7 @@ class TextLocalOriginal
     /**
      * Get Credit Balances
      * @return array
+     * @throws Exception
      */
     public function getBalance()
     {
@@ -497,6 +510,7 @@ class TextLocalOriginal
      * Get messages from an inbox - The ID can ge retrieved from getInboxes()
      * @param $inbox
      * @return array|bool|mixed
+     * @throws Exception
      */
     public function getMessages($inbox)
     {
@@ -509,6 +523,7 @@ class TextLocalOriginal
      * Cancel a scheduled message based on a message ID from getScheduledMessages()
      * @param $id
      * @return array|bool|mixed
+     * @throws Exception
      */
     public function cancelScheduledMessage($id)
     {
@@ -520,6 +535,7 @@ class TextLocalOriginal
     /**
      * Get Scheduled Message information
      * @return array|mixed
+     * @throws Exception
      */
     public function getScheduledMessages()
     {
@@ -531,6 +547,7 @@ class TextLocalOriginal
      * @param     $number
      * @param int $groupid
      * @return array|bool|mixed
+     * @throws Exception
      */
     public function deleteContact($number, $groupid = 5)
     {
@@ -543,6 +560,7 @@ class TextLocalOriginal
      * Delete a group - Be careful, we can not recover any data deleted by mistake
      * @param $groupid
      * @return array|mixed
+     * @throws Exception
      */
     public function deleteGroup($groupid)
     {
@@ -554,9 +572,10 @@ class TextLocalOriginal
      * Get single SMS history (single numbers, comma seperated numbers when sending)
      * @param $start
      * @param $limit
-     * @param $min_time             Unix timestamp
-     * @param $max_time             Unix timestamp
+     * @param $min_time
+     * @param $max_time
      * @return array|bool|mixed
+     * @throws Exception
      */
     public function getSingleMessageHistory($start, $limit, $min_time, $max_time)
     {
@@ -568,9 +587,10 @@ class TextLocalOriginal
      * @param $type
      * @param $start
      * @param $limit
-     * @param $min_time
-     * @param $max_time
+     * @param $min_time - timestamp
+     * @param $max_time - timestamp
      * @return array|bool|mixed
+     * @throws Exception
      */
     private function getHistory($type, $start, $limit, $min_time, $max_time)
     {
@@ -583,9 +603,10 @@ class TextLocalOriginal
      * Get API SMS Message history
      * @param $start
      * @param $limit
-     * @param $min_time             Unix timestamp
-     * @param $max_time             Unix timestamp
+     * @param $min_time - timestamp
+     * @param $max_time - timestamp
      * @return array|bool|mixed
+     * @throws Exception
      */
     public function getAPIMessageHistory($start, $limit, $min_time, $max_time)
     {
@@ -596,9 +617,10 @@ class TextLocalOriginal
      * Get Email to SMS History
      * @param $start
      * @param $limit
-     * @param $min_time             Unix timestamp
-     * @param $max_time             Unix timestamp
+     * @param $min_time - timestamp
+     * @param $max_time - timestamp
      * @return array|bool|mixed
+     * @throws Exception
      */
     public function getEmailToSMSHistory($start, $limit, $min_time, $max_time)
     {
@@ -609,9 +631,10 @@ class TextLocalOriginal
      * Get group SMS history
      * @param $start
      * @param $limit
-     * @param $min_time             Unix timestamp
-     * @param $max_time             Unix timestamp
+     * @param $min_time - timestamp
+     * @param $max_time - timestamp
      * @return array|bool|mixed
+     * @throws Exception
      */
     public function getGroupMessageHistory($start, $limit, $min_time, $max_time)
     {
@@ -621,6 +644,7 @@ class TextLocalOriginal
     /**
      * Get a list of surveys
      * @return array|mixed
+     * @throws Exception
      */
     public function getSurveys()
     {
@@ -628,31 +652,38 @@ class TextLocalOriginal
     }
 
     /**
-     * Get a deatils of a survey
+     * Get a details of a survey
+     * @param $survey_id - survey id
      * @return array|mixed
+     * @throws Exception
      */
-    public function getSurveyDetails()
+    public function getSurveyDetails($survey_id)
     {
-        $options = array('survey_id' => $surveyid);
+        $options = array('survey_id' => $survey_id);
         return $this->_sendRequest('get_survey_details');
     }
 
     /**
      * Get a the results of a given survey
+     * @param $survey_id
+     * @param $start - start date
+     * @param $end - end date
      * @return array|mixed
+     * @throws Exception
      */
-    public function getSurveyResults($surveyid, $start, $end)
+    public function getSurveyResults($survey_id, $start, $end)
     {
-        $options = array('survey_id' => $surveyid, 'start_date' => $start, 'end_date' => $end);
+        $options = array('survey_id' => $survey_id, 'start_date' => $start, 'end_date' => $end);
         return $this->_sendRequest('get_surveys', $options);
     }
 
     /**
      * Get all account optouts
      * @return array|mixed
+     * @throws Exception
      */
 
-    public function getOptouts($time = null)
+    public function getOptouts()
     {
         return $this->_sendRequest('get_optouts');
     }
